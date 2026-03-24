@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Ravi social card">
+  <rect width="1200" height="630" fill="#050816"/>
+  <circle cx="960" cy="110" r="46" fill="#38bdf8" opacity="0.9"/>
+  <path d="M0 0h1200v630H0z" fill="url(#grid)" opacity="0.2"/>
+  <rect x="72" y="72" width="1056" height="486" rx="36" fill="#0b1225" stroke="#1e293b"/>
+  <text x="120" y="214" fill="#94a3b8" font-family="Avenir Next, Segoe UI, sans-serif" font-size="28">Ravi | 丘宇</text>
+  <text x="120" y="308" fill="#f8fafc" font-family="Avenir Next, Segoe UI, sans-serif" font-size="68" font-weight="700">
+    <tspan x="120" dy="0">Product, Growth, AI,</tspan>
+    <tspan x="120" dy="82">and remote execution.</tspan>
+  </text>
+  <text x="120" y="500" fill="#cbd5e1" font-family="Avenir Next, Segoe UI, sans-serif" font-size="30">
+    Systems that turn attention into trust, and trust into work.
+  </text>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#94a3b8" stroke-width="1"/>
+    </pattern>
+  </defs>
+</svg>

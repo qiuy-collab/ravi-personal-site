@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ravi favicon">
+  <rect width="64" height="64" rx="18" fill="#050816"/>
+  <path d="M19 46V18h14.5c7.6 0 12.5 4.1 12.5 10.6 0 4.8-2.8 8.4-7.3 9.8L46 46h-8.5l-6.4-6.9H27V46h-8Zm8-13.2h6.1c3.4 0 5.3-1.5 5.3-4.1 0-2.7-1.9-4.2-5.3-4.2H27v8.3Z" fill="#f8fafc"/>
+  <circle cx="48" cy="17" r="4" fill="#38bdf8"/>
+</svg>
