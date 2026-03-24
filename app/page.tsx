@@ -18,48 +18,53 @@ const pillars = [
 const timeline = [
   {
     year: "2019",
-    title: "Built the technical foundation",
-    subtitle: "Early engineering, product thinking, and remote execution habits",
-    body: "Started combining technical execution with product judgment, building the base for a profile that could move between shipping, teaching, and strategy.",
+    title: "Built a cross-disciplinary foundation",
+    subtitle: "From technical learning to systems thinking",
+    body: "Ravi built his early base by combining technical curiosity, product awareness, and practical execution habits — the kind of foundation that later made him unusually effective across strategy, delivery, and teaching.",
     side: "left",
     accent: "Education",
-    visual: "Structured learning + hands-on delivery"
+    visual: "Campus learning, systems thinking, independent practice",
+    meta: ["Academic foundation", "Technical self-training", "Execution discipline"]
   },
   {
     year: "2021",
-    title: "Moved into product and growth work",
-    subtitle: "From making things to making them land",
-    body: "Shifted into product positioning, landing page thinking, funnel design, and narrative work—connecting execution quality with conversion and trust.",
+    title: "Started designing for growth, not just output",
+    subtitle: "Turning pages, products, and positioning into conversion assets",
+    body: "What changed here was leverage: Ravi moved beyond making things look complete and started making them perform. Positioning, landing pages, funnel logic, and communication strategy became part of the build itself.",
     side: "right",
     accent: "Growth",
-    visual: "Funnels, landing pages, messaging"
+    visual: "Messaging systems, landing pages, funnel architecture",
+    meta: ["Offer design", "Narrative strategy", "Conversion awareness"]
   },
   {
     year: "2023",
-    title: "AI workflow deployment and remote guidance",
-    subtitle: "Operationalized AI for teaching, support, and execution",
-    body: "Started building AI-enabled systems for remote support, async collaboration, deployment guidance, and higher-leverage digital operations.",
+    title: "Operationalized AI for remote delivery",
+    subtitle: "Tooling, async guidance, and real-world implementation support",
+    body: "Ravi began turning AI into an execution layer for remote teaching, deployment support, and team coordination — not as demos, but as repeatable systems people could actually use under real constraints.",
     side: "left",
     accent: "AI Systems",
-    visual: "Async support + toolchain orchestration"
+    visual: "AI workflows, async support, deployment orchestration",
+    meta: ["Remote-first support", "Workflow automation", "Practical AI operations"]
   },
   {
     year: "2024",
-    title: "Projects, demos, and public proof",
-    subtitle: "Personal brand meets visible execution",
-    body: "Turned execution into visible proof with GitHub projects, systems demos, and public-facing assets that position Ravi as a product-growth-AI operator.",
+    title: "Turned private capability into public proof",
+    subtitle: "Shipping visible projects, demos, and systemized workflows",
+    body: "Instead of keeping execution hidden behind conversations, Ravi started publishing proof: GitHub projects, automation demos, deploy pipelines, and personal brand assets that make competence visible to strangers.",
     side: "right",
     accent: "Proof",
-    visual: "GitHub projects + visible shipping"
+    visual: "GitHub projects, CI/CD, public-facing assets",
+    meta: ["Visible shipping", "Portfolio proof", "Infrastructure fluency"]
   },
   {
     year: "Now",
-    title: "Helping clients, classmates, and teams move faster",
-    subtitle: "Strategy + implementation + guidance",
-    body: "Today Ravi focuses on personal brand systems, AI deployment, growth strategy, and remote implementation support for people who want both clarity and momentum.",
+    title: "Building momentum for clients, classmates, and teams",
+    subtitle: "Strategy, implementation, and guidance inside one profile",
+    body: "Today Ravi operates as a high-agency builder across product, growth, AI, and remote delivery — helping people turn scattered ambition into systems, visibility, and usable momentum.",
     side: "left",
     accent: "Current",
-    visual: "Guidance, consulting, implementation"
+    visual: "Consulting, guidance, implementation, personal brand momentum",
+    meta: ["Product + Growth + AI", "Remote execution", "High-trust operator"]
   }
 ] as const;
 
@@ -204,6 +209,16 @@ export default function HomePage() {
                     <h3 className="mt-4 text-2xl font-semibold text-white">{item.title}</h3>
                     <p className="mt-2 text-base text-slate-300">{item.subtitle}</p>
                     <p className="mt-4 text-pretty leading-7 text-slate-300">{item.body}</p>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {item.meta.map((meta) => (
+                        <span
+                          key={meta}
+                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300"
+                        >
+                          {meta}
+                        </span>
+                      ))}
+                    </div>
                   </article>
                 </div>
 
