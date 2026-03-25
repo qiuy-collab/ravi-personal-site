@@ -197,7 +197,7 @@ export default function HomePage() {
           <section className="rounded-3xl bg-card border border-line p-8 shadow-card">
             <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Timeline</h3>
             <div className="mt-5 space-y-5">
-              {timeline.map((item, index) => (
+              {timeline.map((item) => (
                 <article key={item.period} className="relative pl-6 border-l-2 border-line hover:border-accent transition-colors">
                   <span className="absolute -left-2 top-1 w-4 h-4 rounded-full bg-bg border-2 border-accent" />
                   <p className="text-sm font-medium text-accent">{item.period}</p>
