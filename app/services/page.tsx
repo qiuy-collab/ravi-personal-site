@@ -30,21 +30,9 @@ const services = [
 
 export default function ServicesPage() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-6 lg:px-8">
-      <div className="max-w-3xl">
-        <p className="text-sm uppercase tracking-[0.3em] text-accent">Services</p>
-        <h1 className="mt-3 text-balance text-4xl font-semibold text-text-primary sm:text-5xl">
-          Focused offers that can lead to stronger pipelines and stronger execution.
-        </h1>
-      </div>
-      <div className="mt-10 grid gap-5">
-        {services.map((service) => (
-          <article key={service.name} className="hover-lift rounded-[1.75rem] border border-violet-100/50 bg-white/80 p-6 shadow-panel backdrop-blur-lg">
-            <h2 className="text-2xl font-medium text-text-primary">{service.name}</h2>
-            <p className="mt-3 max-w-3xl text-pretty leading-7 text-text-secondary">{service.detail}</p>
-          </article>
-        ))}
-      </div>
+    <div>
+      <h1>Services</h1>
+      <p>Focused offers that can lead to stronger pipelines and stronger execution.</p>
     </div>
   );
 }

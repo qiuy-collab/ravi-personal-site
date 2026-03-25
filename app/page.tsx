@@ -1,16 +1,24 @@
-import Link from "next/link";
+import Card from "@/components/Card";
+import Hero from "@/components/Hero";
+import MobileNav from "@/components/MobileNav";
+import SideNav from "@/components/SideNav";
+
+const heroData = {
+  name: "Ravi · 丘宇",
+  title: "Product · Growth · AI · Remote Guidance",
+  intro:
+    "A modern personal profile for clients, classmates, collaborators, and future teams — built to show direction, capability, and real execution.",
+  tags: ["Product Strategy", "Growth Systems", "AI Workflows", "Remote Execution"],
+  socialLinks: [
+    { label: "GitHub", href: "https://github.com/qiuy-collab" },
+    { label: "Contact", href: "/contact" }
+  ]
+};
 
 const highlights = [
   "Product + Growth + AI operator",
   "Remote deployment, teaching, and guidance",
   "Personal brand systems, workflow design, and hands-on execution"
-];
-
-const quickFacts = [
-  { label: "Location", value: "APAC / Remote" },
-  { label: "Focus", value: "Product, Growth, AI" },
-  { label: "Mode", value: "Build + Guide + Ship" },
-  { label: "Availability", value: "Open to collaboration" }
 ];
 
 const profileSections = [
@@ -109,146 +117,235 @@ const links = [
   }
 ];
 
+const cardSections = [
+  {
+    id: "projects-grid",
+    title: "Selected Work",
+    items: [
+      {
+        badge: "Website",
+        title: "Personal website repository",
+        description:
+          "A public profile site that turns positioning, proof, and shipped assets into one coherent presentation.",
+        href: "https://github.com/qiuy-collab/ravi-personal-site",
+        meta: "GitHub Pages / Next.js"
+      },
+      {
+        badge: "Workflow",
+        title: "PR flow demo",
+        description:
+          "A compact repository that shows local development, pull request review, and deploy-ready collaboration in practice.",
+        href: "https://github.com/qiuy-collab/openclaw-demo-pr-flow",
+        meta: "PR / CI / CD"
+      },
+      {
+        badge: "Support",
+        title: "Remote guidance setup",
+        description:
+          "A service-shaped delivery structure for async support, environment setup, and AI-assisted execution guidance.",
+        href: "/contact",
+        meta: "Collaboration"
+      }
+    ]
+  }
+];
+
 export default function HomePage() {
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-5 py-10 sm:px-6 sm:py-14 lg:px-8">
-      <section className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-        {/* 左侧边栏 - 个人信息卡片 */}
-        <aside className="rounded-[2rem] border border-violet-100/50 bg-white/80 p-6 shadow-panel backdrop-blur-lg lg:sticky lg:top-24 lg:h-fit">
-          <div className="flex items-center gap-4">
-            <div className="flex size-20 items-center justify-center rounded-full border border-violet-200 bg-gradient-to-br from-violet-100 to-blue-100 text-2xl font-semibold text-accent shadow-sm">
-              R
-            </div>
-            <div>
-              <h1 className="text-2xl font-semibold text-text-primary">Ravi · 丘宇</h1>
-              <p className="mt-1 text-sm text-text-secondary">Product · Growth · AI · Remote Guidance</p>
-            </div>
-          </div>
+    <div className="page-layout">
+      <MobileNav />
+      <SideNav />
 
-          <p className="mt-6 text-pretty leading-7 text-text-secondary">
-            A modern personal profile for clients, classmates, collaborators, and future teams — built to show direction,
-            capability, and real execution.
-          </p>
+      <div className="content-area">
+        <div className="content-container space-y-8 animate-in">
+          {/* Decorative floating glows - desktop only */}
+          <div className="float absolute right-12 top-20 hidden h-24 w-24 rounded-full bg-accent/10 blur-2xl lg:block" />
+          <div className="float-delayed absolute left-12 top-[32rem] hidden h-20 w-20 rounded-full bg-accent-secondary/10 blur-2xl lg:block" />
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            {highlights.map((item) => (
-              <span key={item} className="tag rounded-full px-3 py-1 text-xs text-text-secondary">
-                {item}
-              </span>
-            ))}
-          </div>
+          {/* Hero Section */}
+          <Hero {...heroData} />
 
-          <div className="mt-8 grid gap-3 text-sm">
-            {quickFacts.map((fact) => (
-              <div key={fact.label} className="flex items-center justify-between rounded-2xl border border-violet-100/50 bg-gradient-to-r from-violet-50/50 to-blue-50/50 px-4 py-3">
-                <span className="text-text-muted">{fact.label}</span>
-                <span className="font-medium text-text-primary">{fact.value}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-col gap-3">
-            <Link
-              href="/contact"
-              className="rounded-full bg-gradient-to-r from-violet-500 to-blue-500 px-5 py-3 text-center text-sm font-medium text-white shadow-md shadow-violet-200/50 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-violet-300/50"
-            >
-              Contact Ravi
-            </Link>
-            <Link
-              href="#selected-links"
-              className="rounded-full border border-violet-200 bg-white px-5 py-3 text-center text-sm font-medium text-text-primary transition-all duration-200 hover:-translate-y-0.5 hover:border-violet-300 hover:bg-violet-50"
-            >
-              View proof links
-            </Link>
-          </div>
-        </aside>
-
-        {/* 右侧主内容区 */}
-        <div className="space-y-8">
-          {/* Intro 部分 */}
-          <section className="rounded-[2rem] border border-violet-100/50 bg-white/80 p-8 shadow-panel backdrop-blur-lg">
-            <p className="text-sm uppercase tracking-[0.3em] text-accent">Intro</p>
-            <h2 className="mt-4 text-balance text-4xl font-semibold text-text-primary sm:text-5xl">
-              Building credibility with structure, clarity, and shipped systems.
+          {/* Highlights - Feature List Style */}
+          <section className="card reveal visible">
+            <h2 className="heading-2 mb-5 flex items-center gap-2">
+              <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
+              Highlights
             </h2>
-            <p className="mt-6 max-w-3xl text-pretty text-lg leading-8 text-text-secondary">
-              Instead of a flashy landing page, this version is designed like a stronger public profile: a cleaner story,
-              visible proof, and a more complete view of how Ravi works across product, growth, AI, and remote delivery.
-            </p>
+            <ul className="space-y-4 stagger-in">
+              {highlights.map((item, index) => (
+                <li
+                  key={index}
+                  className="group flex items-start gap-4 rounded-lg p-3 transition-all duration-300 hover:bg-accent/5"
+                >
+                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent-secondary/20">
+                    <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  <span className="body-text pt-1">{item}</span>
+                </li>
+              ))}
+            </ul>
           </section>
 
-          {/* 个人简介各部分 */}
-          {profileSections.map((section) => (
-            <section key={section.id} id={section.id} className="hover-lift rounded-[2rem] border border-violet-100/50 bg-white/80 p-8 shadow-panel backdrop-blur-lg">
-              <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.3em] text-accent">{section.title}</p>
+          {/* Profile Sections - Card Grid Style */}
+          <div className="grid gap-6 md:grid-cols-2">
+            {profileSections.map((section, idx) => (
+              <section
+                key={section.id}
+                className="card reveal visible group/card"
+              >
+                <div className="mb-4 flex items-start justify-between">
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/15 to-accent-secondary/15 transition-transform duration-300 group-hover/card:scale-110">
+                      {idx === 0 && (
+                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                      )}
+                      {idx === 1 && (
+                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      )}
+                      {idx === 2 && (
+                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                      )}
+                      {idx === 3 && (
+                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                      )}
+                    </span>
+                    <h2 className="heading-2">{section.title}</h2>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-pretty text-lg leading-8 text-text-secondary">{section.intro}</p>
-                  <ul className="mt-6 space-y-3">
-                    {section.points.map((point) => (
-                      <li key={point} className="flex gap-3 rounded-2xl border border-violet-100/50 bg-gradient-to-r from-violet-50/50 to-transparent p-4 text-text-secondary">
-                        <span className="mt-2 size-2 shrink-0 rounded-full bg-gradient-to-br from-violet-400 to-blue-400" />
-                        <span className="leading-7">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </section>
-          ))}
+                <p className="muted-text mb-4 leading-relaxed">{section.intro}</p>
+                <ul className="space-y-2.5 stagger-in">
+                  {section.points.map((point, index) => (
+                    <li key={index} className="flex items-start gap-2.5">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-accent to-accent-secondary" />
+                      <span className="body-text text-sm">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
 
-          {/* Timeline 部分 */}
-          <section className="rounded-[2rem] border border-violet-100/50 bg-white/80 p-8 shadow-panel backdrop-blur-lg">
-            <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-              <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-accent">Timeline</p>
-              </div>
-              <div className="space-y-6">
-                {timeline.map((item) => (
-                  <article key={item.period} className="hover-lift rounded-[1.5rem] border border-violet-100/50 bg-gradient-to-br from-violet-50/30 to-blue-50/30 p-6 shadow-card">
-                    <p className="text-sm font-medium text-accent">{item.period}</p>
-                    <h3 className="mt-2 text-2xl font-semibold text-text-primary">{item.title}</h3>
-                    <p className="mt-4 text-pretty leading-7 text-text-secondary">{item.body}</p>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {item.details.map((detail) => (
-                        <span key={detail} className="tag rounded-full px-3 py-1 text-xs text-text-secondary">
+          {/* Timeline - Enhanced Visual Style */}
+          <section className="card reveal visible">
+            <h2 className="heading-2 mb-6 flex items-center gap-2">
+              <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
+              Timeline
+            </h2>
+            <div className="timeline space-y-8 stagger-in">
+              {timeline.map((item, index) => (
+                <div key={index} className="relative group">
+                  <div className="timeline-dot glow-pulse" />
+                  <div className="rounded-lg p-4 transition-all duration-300 hover:bg-accent/5">
+                    <span className="kicker mb-1.5 block">{item.period}</span>
+                    <h3 className="heading-3 mb-2">{item.title}</h3>
+                    <p className="muted-text mb-3 leading-relaxed">{item.body}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {item.details.map((detail, i) => (
+                        <span
+                          key={i}
+                          className="tag transition-all duration-300 hover:bg-accent/20"
+                        >
                           {detail}
                         </span>
                       ))}
                     </div>
-                  </article>
-                ))}
-              </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </section>
 
-          {/* Selected links 部分 */}
-          <section id="selected-links" className="rounded-[2rem] border border-violet-100/50 bg-white/80 p-8 shadow-panel backdrop-blur-lg">
-            <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-              <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-accent">Selected links</p>
+          {/* Selected Work - Card Grid */}
+          {cardSections.map((section) => (
+            <section key={section.id} className="space-y-4 reveal visible">
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
+                <h2 className="heading-2">{section.title}</h2>
               </div>
-              <div className="space-y-4">
-                {links.map((link) => (
-                  <Link
-                    key={link.title}
-                    href={link.href}
-                    className="hover-lift group flex items-center justify-between gap-4 rounded-[1.5rem] border border-violet-100/50 bg-gradient-to-r from-violet-50/50 to-transparent p-5 shadow-card hover:border-violet-200"
-                  >
-                    <div>
-                      <p className="text-lg font-medium text-text-primary">{link.title}</p>
-                      <p className="mt-1 text-sm text-text-muted">{link.meta}</p>
-                    </div>
-                    <span className="text-sm text-accent transition-transform duration-200 group-hover:translate-x-1">Open →</span>
-                  </Link>
+              <div className="pillar-grid">
+                {section.items.map((item, cardIdx) => (
+                  <Card
+                    key={item.title}
+                    badge={item.badge}
+                    title={item.title}
+                    description={item.description}
+                    href={item.href}
+                    meta={item.meta}
+                  />
                 ))}
               </div>
+            </section>
+          ))}
+
+          {/* Links - Enhanced List Style */}
+          <section className="card reveal visible">
+            <h2 className="heading-2 mb-5 flex items-center gap-2">
+              <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
+              Links
+            </h2>
+            <div className="space-y-3 stagger-in">
+              {links.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.href}
+                  className="card-clickable group flex items-center justify-between p-4"
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
+                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent/15 to-accent-secondary/15 transition-transform duration-300 group-hover:scale-110">
+                      {index === 0 && (
+                        <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                      )}
+                      {index === 1 && (
+                        <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                      )}
+                      {index === 2 && (
+                        <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                      )}
+                    </span>
+                    <div>
+                      <h3 className="font-medium transition-colors group-hover:text-accent">
+                        {link.title}
+                      </h3>
+                      <p className="muted-text text-sm">{link.meta}</p>
+                    </div>
+                  </div>
+                  <svg
+                    className="h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              ))}
             </div>
           </section>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
