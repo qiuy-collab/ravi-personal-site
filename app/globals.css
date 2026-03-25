@@ -407,9 +407,150 @@
   }
 }
 
-/* ===================================
-   Background Effects
-   =================================== */
+
+@layer components {
+  .single-page-shell {
+    position: relative;
+  }
+
+  .single-page-content {
+    @apply relative space-y-6;
+    padding-bottom: 4rem;
+  }
+
+  .side-nav-shell {
+    @apply flex h-full flex-col justify-between gap-8 px-7 py-10;
+  }
+
+  .side-nav-brand {
+    @apply space-y-3;
+  }
+
+  .side-nav-name {
+    @apply text-xl font-semibold tracking-tight;
+    color: var(--text);
+  }
+
+  .side-nav-role {
+    @apply text-sm leading-relaxed;
+    color: var(--muted);
+  }
+
+  .side-nav-intro {
+    @apply text-sm leading-6;
+    color: var(--muted);
+  }
+
+  .side-nav-tabs {
+    @apply flex flex-col gap-2;
+  }
+
+  .side-tab {
+    @apply flex items-center gap-3 rounded-2xl px-4 py-3 text-left transition-all duration-300;
+    color: var(--muted);
+  }
+
+  .side-tab:hover {
+    background: rgba(95, 140, 255, 0.08);
+    color: var(--text);
+  }
+
+  .side-tab.active {
+    background: rgba(95, 140, 255, 0.12);
+    color: var(--text);
+    box-shadow: inset 0 0 0 1px rgba(95, 140, 255, 0.14);
+  }
+
+  .side-tab-index {
+    @apply text-[11px] font-semibold uppercase tracking-[0.24em];
+    color: var(--accent);
+  }
+
+  .side-nav-footer {
+    @apply flex flex-col gap-1 text-xs;
+    color: var(--muted);
+  }
+
+  .tab-strip {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .tab-chip {
+    @apply rounded-full px-4 py-2 text-sm font-medium transition-all duration-300;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid rgba(78, 110, 199, 0.16);
+    color: var(--muted);
+  }
+
+  .tab-chip:hover {
+    border-color: var(--line-hover);
+    color: var(--text);
+  }
+
+  .tab-chip.active {
+    background: linear-gradient(135deg, rgba(95, 140, 255, 0.16), rgba(140, 107, 255, 0.14));
+    border-color: rgba(95, 140, 255, 0.24);
+    color: var(--text);
+    box-shadow: 0 8px 20px rgba(95, 140, 255, 0.12);
+  }
+
+  .tab-panel {
+    @apply space-y-6;
+  }
+
+  .tab-panel-header {
+    @apply space-y-3;
+  }
+
+  .tab-panel-kicker {
+    @apply inline-flex text-xs font-semibold uppercase tracking-[0.24em];
+    color: var(--accent);
+  }
+
+  .summary-card {
+    @apply rounded-2xl p-5;
+    background: rgba(255, 255, 255, 0.62);
+    border: 1px solid rgba(78, 110, 199, 0.14);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  }
+
+  .summary-label {
+    @apply mb-2 block text-xs font-semibold uppercase tracking-[0.22em];
+    color: var(--muted);
+  }
+
+  .summary-value {
+    @apply text-base font-semibold leading-relaxed;
+    color: var(--text);
+  }
+
+  .section-card {
+    min-height: 100%;
+  }
+
+  .feature-row {
+    @apply flex items-start gap-3 rounded-2xl px-1 py-1;
+  }
+
+  .feature-row.compact {
+    @apply gap-2.5;
+  }
+
+  .feature-dot {
+    @apply mt-2 h-2.5 w-2.5 shrink-0 rounded-full;
+    background: linear-gradient(180deg, var(--accent), var(--accent2));
+    box-shadow: 0 0 0 4px rgba(95, 140, 255, 0.08);
+  }
+
+  .timeline-card {
+    @apply overflow-hidden;
+  }
+
+  .note-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.72));
+  }
+}
+
 @layer utilities {
   /* 背景光晕 */
   .bg-glow {
@@ -838,21 +979,21 @@
     @apply flex flex-col gap-1 px-4 py-6;
   }
 
-  .mobile-nav-drawer li a {
-    @apply flex items-center px-4 py-3 rounded-badge;
+  .mobile-nav-drawer li button {
+    @apply flex w-full items-center px-4 py-3 rounded-badge text-left;
     @apply transition-all duration-200;
   }
 
-  .mobile-nav-drawer li a.active {
+  .mobile-nav-drawer li button.active {
     @apply text-accent font-medium;
     background: rgba(95, 140, 255, 0.1);
   }
 
-  .mobile-nav-drawer li a:not(.active) {
+  .mobile-nav-drawer li button:not(.active) {
     @apply text-text-muted hover:text-text;
   }
 
-  .mobile-nav-drawer li a:not(.active):hover {
+  .mobile-nav-drawer li button:not(.active):hover {
     background: rgba(78, 110, 199, 0.15);
   }
 

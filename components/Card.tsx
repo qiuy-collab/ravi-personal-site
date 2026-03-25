@@ -39,8 +39,15 @@ function CardInner({ badge, title, description, meta }: Omit<CardProps, "href">)
 
 export default function Card({ badge, title, description, href, meta }: CardProps) {
   if (href) {
+    const external = href.startsWith("http");
+
     return (
-      <a href={href} className="card-clickable group block">
+      <a
+        href={href}
+        className="card-clickable group block"
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+      >
         <CardInner badge={badge} title={title} description={description} meta={meta} />
       </a>
     );
