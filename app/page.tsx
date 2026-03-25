@@ -111,134 +111,127 @@ const links = [
 
 export default function HomePage() {
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-5 py-10 sm:px-6 sm:py-14 lg:px-8">
-      <section className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-        <aside className="rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-panel lg:sticky lg:top-24 lg:h-fit">
-          <div className="flex items-center gap-4">
-            <div className="flex size-20 items-center justify-center rounded-full border border-white/10 bg-white/5 text-2xl font-semibold text-white">
-              R
-            </div>
-            <div>
-              <h1 className="text-2xl font-semibold text-white">Ravi · 丘宇</h1>
-              <p className="mt-1 text-sm text-slate-300">Product · Growth · AI · Remote Guidance</p>
-            </div>
-          </div>
-
-          <p className="mt-6 text-pretty leading-7 text-slate-300">
-            A modern personal profile for clients, classmates, collaborators, and future teams — built to show direction,
-            capability, and real execution.
-          </p>
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {highlights.map((item) => (
-              <span key={item} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
-                {item}
-              </span>
-            ))}
-          </div>
-
-          <div className="mt-8 grid gap-3 text-sm">
-            {quickFacts.map((fact) => (
-              <div key={fact.label} className="flex items-center justify-between rounded-2xl border border-white/10 bg-ink/50 px-4 py-3">
-                <span className="text-slate-400">{fact.label}</span>
-                <span className="font-medium text-white">{fact.value}</span>
+    <div className="mx-auto max-w-5xl px-6 py-12">
+      {/* Hero Section */}
+      <section className="flex flex-col md:flex-row gap-8 items-start">
+        {/* 左侧头像和基本信息 */}
+        <aside className="w-full md:w-80 shrink-0">
+          <div className="rounded-3xl bg-card border border-line p-8 shadow-card">
+            {/* 头像 */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-28 h-28 rounded-full bg-gradient-to-br from-accent to-accent2 flex items-center justify-center text-white font-bold text-4xl shadow-lg">
+                R
               </div>
-            ))}
-          </div>
+              <h1 className="mt-5 text-2xl font-bold text-text">Ravi</h1>
+              <p className="text-muted text-sm mt-1">丘宇</p>
+              <p className="text-muted text-sm mt-3">Product · Growth · AI</p>
+            </div>
 
-          <div className="mt-8 flex flex-col gap-3">
-            <Link
-              href="/contact"
-              className="rounded-full bg-accent px-5 py-3 text-center text-sm font-medium text-slate-950 transition-transform duration-200 hover:-translate-y-0.5"
-            >
-              Contact Ravi
-            </Link>
-            <Link
-              href="#selected-links"
-              className="rounded-full border border-white/15 px-5 py-3 text-center text-sm font-medium text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-white/5"
-            >
-              View proof links
-            </Link>
+            {/* 标签 */}
+            <div className="mt-6 flex flex-wrap gap-2 justify-center">
+              {highlights.map((item) => (
+                <span key={item} className="rounded-full bg-bg px-3 py-1.5 text-xs text-muted border border-line">
+                  {item}
+                </span>
+              ))}
+            </div>
+
+            {/* 快速信息 */}
+            <div className="mt-6 space-y-3">
+              {quickFacts.map((fact) => (
+                <div key={fact.label} className="flex items-center justify-between text-sm py-2 border-b border-line last:border-0">
+                  <span className="text-muted">{fact.label}</span>
+                  <span className="font-medium text-text">{fact.value}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* 按钮 */}
+            <div className="mt-6 space-y-3">
+              <Link
+                href="/contact"
+                className="block w-full rounded-xl bg-gradient-to-r from-accent to-accent2 px-5 py-3 text-center text-sm font-medium text-white shadow-md hover:shadow-lg transition-all"
+              >
+                Contact Ravi
+              </Link>
+              <Link
+                href="#selected-links"
+                className="block w-full rounded-xl border border-line bg-bg px-5 py-3 text-center text-sm font-medium text-text hover:border-accent transition-colors"
+              >
+                View Projects
+              </Link>
+            </div>
           </div>
         </aside>
 
-        <div className="space-y-8">
-          <section className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Intro</p>
-            <h2 className="mt-4 text-balance text-4xl font-semibold text-white sm:text-5xl">
+        {/* 右侧主要内容 */}
+        <div className="flex-1 space-y-6">
+          {/* 简介 */}
+          <section className="rounded-3xl bg-card border border-line p-8 shadow-card">
+            <h2 className="text-3xl font-bold text-text leading-tight">
               Building credibility with structure, clarity, and shipped systems.
             </h2>
-            <p className="mt-6 max-w-3xl text-pretty text-lg leading-8 text-slate-300">
-              Instead of a flashy landing page, this version is designed like a stronger public profile: a cleaner story,
-              visible proof, and a more complete view of how Ravi works across product, growth, AI, and remote delivery.
+            <p className="mt-4 text-muted leading-relaxed">
+              A modern personal profile for clients, classmates, collaborators, and future teams — built to show direction,
+              capability, and real execution.
             </p>
           </section>
 
+          {/* 各部分内容 */}
           {profileSections.map((section) => (
-            <section key={section.id} id={section.id} className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-              <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-                <div>
-                  <p className="text-sm uppercase tracking-[0.3em] text-slate-400">{section.title}</p>
-                </div>
-                <div>
-                  <p className="text-pretty text-lg leading-8 text-slate-300">{section.intro}</p>
-                  <ul className="mt-6 space-y-3">
-                    {section.points.map((point) => (
-                      <li key={point} className="flex gap-3 rounded-2xl border border-white/10 bg-ink/50 p-4 text-slate-300">
-                        <span className="mt-2 size-2 rounded-full bg-accent" />
-                        <span className="leading-7">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            <section key={section.id} id={section.id} className="rounded-3xl bg-card border border-line p-8 shadow-card">
+              <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">{section.title}</h3>
+              <p className="mt-3 text-muted leading-relaxed">{section.intro}</p>
+              <ul className="mt-5 space-y-3">
+                {section.points.map((point) => (
+                  <li key={point} className="flex gap-3 items-start">
+                    <span className="mt-2 w-2 h-2 rounded-full bg-accent shrink-0" />
+                    <span className="text-text leading-relaxed">{point}</span>
+                  </li>
+                ))}
+              </ul>
             </section>
           ))}
 
-          <section className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-              <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Timeline</p>
-              </div>
-              <div className="space-y-6">
-                {timeline.map((item) => (
-                  <article key={item.period} className="rounded-[1.5rem] border border-white/10 bg-ink/50 p-6">
-                    <p className="text-sm text-accent">{item.period}</p>
-                    <h3 className="mt-2 text-2xl font-semibold text-white">{item.title}</h3>
-                    <p className="mt-4 text-pretty leading-7 text-slate-300">{item.body}</p>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {item.details.map((detail) => (
-                        <span key={detail} className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300">
-                          {detail}
-                        </span>
-                      ))}
-                    </div>
-                  </article>
-                ))}
-              </div>
+          {/* 时间线 */}
+          <section className="rounded-3xl bg-card border border-line p-8 shadow-card">
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Timeline</h3>
+            <div className="mt-5 space-y-5">
+              {timeline.map((item, index) => (
+                <article key={item.period} className="relative pl-6 border-l-2 border-line hover:border-accent transition-colors">
+                  <span className="absolute -left-2 top-1 w-4 h-4 rounded-full bg-bg border-2 border-accent" />
+                  <p className="text-sm font-medium text-accent">{item.period}</p>
+                  <h4 className="mt-1 text-lg font-semibold text-text">{item.title}</h4>
+                  <p className="mt-2 text-muted text-sm leading-relaxed">{item.body}</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {item.details.map((detail) => (
+                      <span key={detail} className="rounded-full bg-bg px-2.5 py-1 text-xs text-muted border border-line">
+                        {detail}
+                      </span>
+                    ))}
+                  </div>
+                </article>
+              ))}
             </div>
           </section>
 
-          <section id="selected-links" className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
-            <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr]">
-              <div>
-                <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Selected links</p>
-              </div>
-              <div className="space-y-4">
-                {links.map((link) => (
-                  <Link
-                    key={link.title}
-                    href={link.href}
-                    className="group flex items-center justify-between gap-4 rounded-[1.5rem] border border-white/10 bg-ink/50 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40"
-                  >
-                    <div>
-                      <p className="text-lg font-medium text-white">{link.title}</p>
-                      <p className="mt-1 text-sm text-slate-400">{link.meta}</p>
-                    </div>
-                    <span className="text-sm text-accent transition-transform duration-200 group-hover:translate-x-1">Open →</span>
-                  </Link>
-                ))}
-              </div>
+          {/* 链接 */}
+          <section id="selected-links" className="rounded-3xl bg-card border border-line p-8 shadow-card">
+            <h3 className="text-sm font-semibold text-accent uppercase tracking-wider">Selected Links</h3>
+            <div className="mt-5 space-y-3">
+              {links.map((link) => (
+                <Link
+                  key={link.title}
+                  href={link.href}
+                  className="group flex items-center justify-between gap-4 rounded-2xl bg-bg border border-line p-5 hover:border-accent hover:shadow-card transition-all"
+                >
+                  <div>
+                    <p className="font-medium text-text">{link.title}</p>
+                    <p className="text-sm text-muted mt-0.5">{link.meta}</p>
+                  </div>
+                  <span className="text-accent text-sm font-medium group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              ))}
             </div>
           </section>
         </div>

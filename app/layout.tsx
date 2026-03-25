@@ -79,54 +79,54 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-ink text-white">
-      <body className="min-h-dvh bg-ink text-white antialiased">
-        <div className="relative isolate overflow-hidden">
+    <html lang="en" className="bg-bg text-text">
+      <body className="min-h-screen bg-bg text-text antialiased">
+        <div className="relative min-h-screen">
+          {/* 背景装饰 */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-grid bg-[size:32px_32px] opacity-20"
+            className="pointer-events-none fixed inset-0 bg-grid opacity-30"
           />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-[28rem] bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_55%)]"
-          />
-          <header className="sticky top-0 z-30 border-b border-white/10 bg-ink/85 backdrop-blur-sm">
-            <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-4 sm:px-6 lg:px-8">
-              <Link href="/" className="flex items-center gap-3 text-sm font-medium text-white">
-                <span className="flex size-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-base">
+          {/* 导航栏 */}
+          <header className="sticky top-0 z-50 backdrop-blur-md bg-bg/80 border-b border-line">
+            <nav className="mx-auto max-w-5xl px-6 py-4 flex items-center justify-between">
+              <Link href="/" className="flex items-center gap-3 text-text hover:opacity-80 transition-opacity">
+                <span className="w-10 h-10 rounded-full bg-gradient-to-br from-accent to-accent2 flex items-center justify-center text-white font-semibold text-lg">
                   R
                 </span>
-                <span className="text-balance">
-                  Ravi <span className="text-soft">| 丘宇</span>
+                <span className="font-medium text-lg">
+                  Ravi <span className="text-muted font-normal">丘宇</span>
                 </span>
               </Link>
-              <nav className="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+              <div className="flex items-center gap-6">
                 {navItems.map((item) => (
-                  <Link key={item.href} href={item.href} className="transition-transform duration-200 hover:-translate-y-0.5 hover:text-white">
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="text-muted hover:text-text transition-colors text-sm font-medium"
+                  >
                     {item.label}
                   </Link>
                 ))}
-              </nav>
-              <Link
-                href="/contact"
-                className="rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-medium text-accent transition-transform duration-200 hover:-translate-y-0.5 hover:bg-accent/15"
-              >
-                Book a call
-              </Link>
-            </div>
+              </div>
+            </nav>
           </header>
-          <main>{children}</main>
-          <footer className="border-t border-white/10">
-            <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-5 py-8 text-sm text-slate-400 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-              <p className="text-pretty">Built for conversations, credibility, and conversion.</p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="mailto:ravi@example.com" className="hover:text-white">
+          {/* 主内容 */}
+          <main className="relative z-10">
+            {children}
+          </main>
+          {/* 页脚 */}
+          <footer className="border-t border-line bg-bg/50 backdrop-blur-sm">
+            <div className="mx-auto max-w-5xl px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
+              <p>Built for conversations, credibility, and conversion.</p>
+              <div className="flex items-center gap-4">
+                <Link href="mailto:ravi@example.com" className="hover:text-accent transition-colors">
                   ravi@example.com
                 </Link>
-                <Link href="https://github.com/" className="hover:text-white">
+                <Link href="https://github.com/" className="hover:text-accent transition-colors">
                   GitHub
                 </Link>
-                <Link href="https://www.linkedin.com/" className="hover:text-white">
+                <Link href="https://www.linkedin.com/" className="hover:text-accent transition-colors">
                   LinkedIn
                 </Link>
               </div>

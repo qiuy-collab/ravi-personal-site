@@ -18,13 +18,13 @@ const highlights = [
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto w-full max-w-5xl px-5 py-12 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-5xl px-6 py-12">
       <div className="max-w-3xl">
-        <p className="text-sm uppercase text-slate-400">About</p>
-        <h1 className="mt-3 text-balance text-4xl font-semibold text-white sm:text-5xl">
+        <p className="text-sm font-semibold text-accent uppercase tracking-wider">About</p>
+        <h1 className="mt-3 text-4xl font-bold text-text sm:text-5xl leading-tight">
           Ravi helps people ship with sharper thinking and less noise.
         </h1>
-        <p className="mt-6 text-pretty text-lg leading-8 text-slate-300">
+        <p className="mt-6 text-lg text-muted leading-relaxed">
           This first iteration positions Ravi as a strategic operator who can bridge product, growth, AI tooling,
           teaching, and deployment support. Where hard data is still being collected, the site uses restrained
           placeholder copy instead of empty gaps.
@@ -32,8 +32,8 @@ export default function AboutPage() {
       </div>
       <div className="mt-10 grid gap-4 md:grid-cols-2">
         {highlights.map((item) => (
-          <div key={item} className="rounded-[1.5rem] border border-white/10 bg-white/5 p-6">
-            <p className="text-pretty leading-7 text-slate-300">{item}</p>
+          <div key={item} className="rounded-2xl bg-card border border-line p-6 shadow-card hover:shadow-hover transition-shadow">
+            <p className="text-text leading-relaxed">{item}</p>
           </div>
         ))}
       </div>
