@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -11,17 +11,86 @@ html {
 }
 
 body {
-  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background:
-    radial-gradient(circle at top, rgba(56, 189, 248, 0.08), transparent 28%),
-    linear-gradient(180deg, #050816 0%, #070d1d 45%, #050816 100%);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  background: #f5f8ff;
+  color: #1c2746;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* 背景渐变光晕效果 */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto;
+  width: 40rem;
+  height: 40rem;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+
+body::before {
+  top: -15rem;
+  left: -12rem;
+  background: radial-gradient(circle, rgba(95, 140, 255, 0.25), transparent 65%);
+}
+
+body::after {
+  right: -12rem;
+  bottom: -18rem;
+  background: radial-gradient(circle, rgba(140, 107, 255, 0.22), transparent 65%);
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.3);
-  color: #f8fafc;
+  background: rgba(95, 140, 255, 0.25);
+  color: #1c2746;
+}
+
+/* 平滑滚动 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(78, 110, 199, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(78, 110, 199, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(78, 110, 199, 0.35);
+}
+
+/* Focus 样式 */
+:focus-visible {
+  outline: 2px solid #5f8cff;
+  outline-offset: 2px;
+}
+
+/* 卡片悬停效果 */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
 }
