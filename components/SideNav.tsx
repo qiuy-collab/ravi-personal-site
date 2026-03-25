@@ -1,65 +1,58 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
 interface NavItem {
   label: string;
   href: string;
-  icon?: string;
 }
 
 interface SideNavProps {
-  navItems?: NavItem[];
+  name: string;
+  role: string;
+  intro: string;
+  navItems: NavItem[];
+  activeTab: string;
+  onTabChange: (href: string) => void;
 }
 
-const defaultNavItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" }
-];
-
-export default function SideNav({ navItems = defaultNavItems }: SideNavProps) {
-  const pathname = usePathname();
-
+export default function SideNav({
+  name,
+  role,
+  intro,
+  navItems,
+  activeTab,
+  onTabChange
+}: SideNavProps) {
   return (
     <aside className="side-nav">
-      <nav className="flex flex-col h-full">
-        {/* Navigation Links */}
-        <ul className="flex flex-col gap-1 px-4 py-6">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
+      <div className="side-nav-shell">
+        <div className="side-nav-brand">
+          <p className="side-nav-name">{name}</p>
+          <p className="side-nav-role">{role}</p>
+          <p className="side-nav-intro">{intro}</p>
+        </div>
+
+        <nav className="side-nav-tabs" aria-label="Primary">
+          {navItems.map((item, index) => {
+            const isActive = activeTab === item.href;
             return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`
-                    flex items-center px-4 py-3 rounded-badge
-                    transition-all duration-200
-                    ${
-                      isActive
-                        ? "bg-accent/10 text-accent font-medium"
-                        : "text-muted hover:text-text hover:bg-line/50"
-                    }
-                  `}
-                >
-                  {item.icon && <span className="mr-3">{item.icon}</span>}
-                  {item.label}
-                </Link>
-              </li>
+              <button
+                key={item.href}
+                type="button"
+                className={`side-tab ${isActive ? "active" : ""}`}
+                onClick={() => onTabChange(item.href)}
+              >
+                <span className="side-tab-index">0{index + 1}</span>
+                <span>{item.label}</span>
+              </button>
             );
           })}
-        </ul>
+        </nav>
 
-        {/* Footer */}
-        <div className="mt-auto px-6 py-4 border-t border-line">
-          <p className="muted-text text-center">
-            © {new Date().getFullYear()} Ravi
-          </p>
+        <div className="side-nav-footer">
+          <span>Available for selected remote work.</span>
+          <span>© {new Date().getFullYear()} Ravi</span>
         </div>
-      </nav>
+      </div>
     </aside>
   );
 }

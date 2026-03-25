@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface NavItem {
   label: string;
@@ -10,27 +8,24 @@ interface NavItem {
 }
 
 interface MobileNavProps {
-  navItems?: NavItem[];
+  name: string;
+  navItems: NavItem[];
+  activeTab: string;
+  onTabChange: (href: string) => void;
 }
 
-const defaultNavItems: NavItem[] = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" }
-];
-
-export default function MobileNav({ navItems = defaultNavItems }: MobileNavProps) {
-  const pathname = usePathname();
+export default function MobileNav({
+  name,
+  navItems,
+  activeTab,
+  onTabChange
+}: MobileNavProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Close drawer on route change
   useEffect(() => {
     setIsOpen(false);
-  }, [pathname]);
+  }, [activeTab]);
 
-  // Prevent body scroll when drawer is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -44,7 +39,6 @@ export default function MobileNav({ navItems = defaultNavItems }: MobileNavProps
 
   return (
     <>
-      {/* Toggle Button */}
       <button
         className={`mobile-nav-toggle ${isOpen ? "open" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
@@ -58,36 +52,37 @@ export default function MobileNav({ navItems = defaultNavItems }: MobileNavProps
         </div>
       </button>
 
-      {/* Overlay */}
       <div
         className={`mobile-nav-overlay ${isOpen ? "open" : ""}`}
         onClick={() => setIsOpen(false)}
         aria-hidden="true"
       />
 
-      {/* Drawer */}
       <div className={`mobile-nav-drawer ${isOpen ? "open" : ""}`}>
+        <div className="mobile-nav-drawer-head">
+          <p className="side-nav-name">{name}</p>
+        </div>
         <nav>
           <ul>
-            {navItems.map((item) => {
-              const isActive = pathname === item.href;
+            {navItems.map((item, index) => {
+              const isActive = activeTab === item.href;
               return (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
+                  <button
+                    type="button"
                     className={isActive ? "active" : ""}
+                    onClick={() => onTabChange(item.href)}
                   >
-                    {item.label}
-                  </Link>
+                    <span className="side-tab-index">0{index + 1}</span>
+                    <span>{item.label}</span>
+                  </button>
                 </li>
               );
             })}
           </ul>
 
           <div className="mobile-nav-drawer-footer">
-            <p className="muted-text text-center">
-              © {new Date().getFullYear()} Ravi
-            </p>
+            <p className="muted-text">Single-page profile navigation</p>
           </div>
         </nav>
       </div>

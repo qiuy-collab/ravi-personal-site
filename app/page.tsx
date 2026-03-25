@@ -1,349 +1,364 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
 import Card from "@/components/Card";
 import Hero from "@/components/Hero";
 import MobileNav from "@/components/MobileNav";
 import SideNav from "@/components/SideNav";
 
+const tabItems = [
+  { label: "Profile", href: "profile" },
+  { label: "Journey", href: "journey" },
+  { label: "Work", href: "work" },
+  { label: "Connect", href: "connect" }
+];
+
 const heroData = {
   name: "Ravi · 丘宇",
   title: "Product · Growth · AI · Remote Guidance",
   intro:
-    "A modern personal profile for clients, classmates, collaborators, and future teams — built to show direction, capability, and real execution.",
-  tags: ["Product Strategy", "Growth Systems", "AI Workflows", "Remote Execution"],
+    "Ravi turns product positioning, growth communication, and AI-assisted execution into compact systems that are easy to trust, review, and ship.",
+  tags: ["Product Systems", "Growth Narrative", "AI Workflows", "Remote Delivery"],
   socialLinks: [
     { label: "GitHub", href: "https://github.com/qiuy-collab" },
-    { label: "Contact", href: "/contact" }
+    { label: "Contact", href: "#connect-note" }
   ]
 };
 
-const highlights = [
-  "Product + Growth + AI operator",
-  "Remote deployment, teaching, and guidance",
-  "Personal brand systems, workflow design, and hands-on execution"
+const summaryStats = [
+  { label: "Focus", value: "Product × Growth × AI" },
+  { label: "Mode", value: "Async remote execution" },
+  { label: "Output", value: "Sites, flows, proof" }
 ];
 
-const profileSections = [
+const profileBlocks = [
   {
-    id: "about",
-    title: "About",
+    title: "About Ravi",
     intro:
-      "Ravi (丘宇) works at the intersection of product strategy, growth systems, AI workflow design, and remote execution. He helps people turn loose ambition into visible systems, stronger positioning, and work that actually ships.",
+      "Ravi works across product strategy, growth systems, AI workflow design, and remote execution support. The work is less about isolated assets and more about building visible, compounding capability.",
     points: [
-      "Combines product thinking with growth logic and AI operations",
-      "Comfortable moving between strategy, implementation, and teaching",
-      "Builds pages, workflows, and delivery systems designed to earn trust quickly"
+      "Connects strategy, messaging, tooling, and delivery into one usable flow",
+      "Comfortable switching between operator, builder, and guide roles",
+      "Prefers simple systems that create trust fast"
     ]
   },
   {
-    id: "journey",
-    title: "Journey",
+    title: "What stands out",
     intro:
-      "The path is less about a single job title and more about building compounding capability: technical execution, product judgment, growth communication, and AI-enabled delivery.",
+      "The differentiator is not a single discipline. It is the ability to compress several disciplines into one clean delivery rhythm.",
     points: [
-      "Started from technical learning and independent experimentation",
-      "Expanded into product positioning, offer design, and conversion thinking",
-      "Now focused on remote guidance, deployment support, and AI-backed operations"
-    ]
-  },
-  {
-    id: "projects",
-    title: "Selected Projects",
-    intro:
-      "This website is structured like a living profile: public proof, shipped demos, and systems that show how Ravi thinks and executes.",
-    points: [
-      "Personal website and brand system on GitHub Pages",
-      "Verified local dev → PR → CI/CD workflow demo",
-      "More projects, case studies, and public proof can be added as the profile grows"
-    ]
-  },
-  {
-    id: "experience",
-    title: "What Ravi Brings",
-    intro:
-      "The strength here is not just design or code in isolation. It is the ability to connect messaging, systems, tooling, and delivery into one usable flow.",
-    points: [
-      "Product strategy translated into shippable structure",
-      "Growth language translated into conversion-ready pages",
-      "AI tools translated into workflows teams can actually operate"
+      "Product judgment translated into page and workflow structure",
+      "Growth language translated into conversion-ready communication",
+      "AI tools translated into repeatable execution layers"
     ]
   }
 ];
 
-const timeline = [
+const journeyTimeline = [
   {
-    period: "2019 — Foundation",
-    title: "Technical curiosity became systems thinking",
+    period: "2019",
+    title: "Technical foundation",
     body:
-      "Ravi built an early base through technical learning, independent practice, and structured self-training. This stage created the discipline that later made cross-functional work possible.",
-    details: ["Academic foundation", "Independent building", "Execution discipline"]
+      "Independent practice, technical learning, and self-training created the execution discipline that supports later cross-functional work.",
+    details: ["Learning", "Practice", "Discipline"]
   },
   {
-    period: "2021 — Product & Growth",
-    title: "Output evolved into positioning and conversion",
+    period: "2021",
+    title: "Product and growth framing",
     body:
-      "The focus shifted from merely producing pages or assets to making them land. Narrative framing, funnel logic, and offer clarity became part of the work itself.",
-    details: ["Positioning", "Landing pages", "Narrative strategy"]
+      "The work expanded from producing outputs to shaping positioning, funnel thinking, and communication that could move decisions.",
+    details: ["Positioning", "Narrative", "Conversion"]
   },
   {
-    period: "2023 — AI & Remote Delivery",
-    title: "AI became an operational layer",
+    period: "2023",
+    title: "AI as infrastructure",
     body:
-      "Ravi started turning AI into a daily execution layer for support, deployment, async coordination, and guided implementation — not as hype, but as practical infrastructure.",
-    details: ["Workflow automation", "Remote support", "Operational AI"]
+      "AI became part of day-to-day execution for delivery support, workflow acceleration, remote guidance, and operational handoff.",
+    details: ["Automation", "Support", "Operations"]
   },
   {
-    period: "2024 — Public Proof",
-    title: "Private capability turned into visible assets",
+    period: "2024",
+    title: "Public proof of work",
     body:
-      "Projects, workflows, and demos began moving into public view: GitHub repositories, deploy pipelines, and personal assets that make competence legible to strangers.",
-    details: ["GitHub projects", "CI/CD", "Public-facing proof"]
+      "Repositories, demos, and deployable assets started turning private capability into public proof that strangers can inspect quickly.",
+    details: ["Repositories", "Deploys", "Proof"]
   }
 ];
 
-const links = [
+const selectedWork = [
+  {
+    badge: "Website",
+    title: "Personal website repository",
+    description:
+      "A public-facing site that packages positioning, visual proof, and shipped assets into one coherent surface.",
+    href: "https://github.com/qiuy-collab/ravi-personal-site",
+    meta: "Next.js / GitHub Pages"
+  },
+  {
+    badge: "Workflow",
+    title: "PR flow demo",
+    description:
+      "A compact repo showing how local building, pull request review, and deploy-ready collaboration work together in practice.",
+    href: "https://github.com/qiuy-collab/openclaw-demo-pr-flow",
+    meta: "PR / CI / CD"
+  },
+  {
+    badge: "Service",
+    title: "Remote guidance setup",
+    description:
+      "A delivery model for async support, environment setup, and AI-assisted execution guidance around real work.",
+    href: "#connect-note",
+    meta: "Guidance / Collaboration"
+  }
+];
+
+const connectItems = [
+  {
+    title: "GitHub profile",
+    href: "https://github.com/qiuy-collab",
+    meta: "Code, repos, public proof"
+  },
   {
     title: "Personal website repository",
     href: "https://github.com/qiuy-collab/ravi-personal-site",
-    meta: "Website / GitHub Pages"
+    meta: "Source and deployment history"
   },
   {
     title: "Workflow demo repository",
     href: "https://github.com/qiuy-collab/openclaw-demo-pr-flow",
-    meta: "PR / CI / CD demo"
-  },
-  {
-    title: "Contact Ravi",
-    href: "/contact",
-    meta: "Collaboration / Guidance"
+    meta: "Review and CI/CD example"
   }
 ];
 
-const cardSections = [
-  {
-    id: "projects-grid",
-    title: "Selected Work",
-    items: [
-      {
-        badge: "Website",
-        title: "Personal website repository",
-        description:
-          "A public profile site that turns positioning, proof, and shipped assets into one coherent presentation.",
-        href: "https://github.com/qiuy-collab/ravi-personal-site",
-        meta: "GitHub Pages / Next.js"
-      },
-      {
-        badge: "Workflow",
-        title: "PR flow demo",
-        description:
-          "A compact repository that shows local development, pull request review, and deploy-ready collaboration in practice.",
-        href: "https://github.com/qiuy-collab/openclaw-demo-pr-flow",
-        meta: "PR / CI / CD"
-      },
-      {
-        badge: "Support",
-        title: "Remote guidance setup",
-        description:
-          "A service-shaped delivery structure for async support, environment setup, and AI-assisted execution guidance.",
-        href: "/contact",
-        meta: "Collaboration"
-      }
-    ]
-  }
-];
-
-export default function HomePage() {
+function ProfileTab() {
   return (
-    <div className="page-layout">
-      <MobileNav />
-      <SideNav />
+    <section className="tab-panel reveal visible space-y-6">
+      <div className="tab-panel-header card">
+        <span className="tab-panel-kicker">Profile</span>
+        <h2 className="heading-2">A compact profile shaped like an execution system.</h2>
+        <p className="body-text max-w-2xl">
+          The structure follows the reference site&apos;s left-fixed profile rail and right-side tab rhythm,
+          while the content is remapped to Ravi&apos;s own positioning, working method, and visible proof.
+        </p>
+      </div>
 
-      <div className="content-area">
-        <div className="content-container space-y-8 animate-in">
-          {/* Decorative floating glows - desktop only */}
-          <div className="float absolute right-12 top-20 hidden h-24 w-24 rounded-full bg-accent/10 blur-2xl lg:block" />
-          <div className="float-delayed absolute left-12 top-[32rem] hidden h-20 w-20 rounded-full bg-accent-secondary/10 blur-2xl lg:block" />
+      <div className="numbers-grid">
+        {summaryStats.map((item) => (
+          <div key={item.label} className="summary-card">
+            <span className="summary-label">{item.label}</span>
+            <strong className="summary-value">{item.value}</strong>
+          </div>
+        ))}
+      </div>
 
-          {/* Hero Section */}
-          <Hero {...heroData} />
-
-          {/* Highlights - Feature List Style */}
-          <section className="card reveal visible">
-            <h2 className="heading-2 mb-5 flex items-center gap-2">
-              <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
-              Highlights
-            </h2>
-            <ul className="space-y-4 stagger-in">
-              {highlights.map((item, index) => (
-                <li
-                  key={index}
-                  className="group flex items-start gap-4 rounded-lg p-3 transition-all duration-300 hover:bg-accent/5"
-                >
-                  <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/20 to-accent-secondary/20">
-                    <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                  <span className="body-text pt-1">{item}</span>
+      <div className="grid gap-6 md:grid-cols-2">
+        {profileBlocks.map((block) => (
+          <section key={block.title} className="card section-card">
+            <h3 className="heading-3 mb-3">{block.title}</h3>
+            <p className="muted-text mb-4">{block.intro}</p>
+            <ul className="space-y-2.5 stagger-in">
+              {block.points.map((point) => (
+                <li key={point} className="feature-row compact">
+                  <span className="feature-dot" />
+                  <span className="body-text text-sm">{point}</span>
                 </li>
               ))}
             </ul>
           </section>
+        ))}
+      </div>
+    </section>
+  );
+}
 
-          {/* Profile Sections - Card Grid Style */}
-          <div className="grid gap-6 md:grid-cols-2">
-            {profileSections.map((section, idx) => (
-              <section
-                key={section.id}
-                className="card reveal visible group/card"
-              >
-                <div className="mb-4 flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-accent/15 to-accent-secondary/15 transition-transform duration-300 group-hover/card:scale-110">
-                      {idx === 0 && (
-                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      )}
-                      {idx === 1 && (
-                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      )}
-                      {idx === 2 && (
-                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                        </svg>
-                      )}
-                      {idx === 3 && (
-                        <svg className="h-5 w-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                        </svg>
-                      )}
+function JourneyTab() {
+  return (
+    <section className="tab-panel reveal visible space-y-6">
+      <div className="tab-panel-header card">
+        <span className="tab-panel-kicker">Journey</span>
+        <h2 className="heading-2">Capability built in layers, then made public.</h2>
+      </div>
+
+      <section className="card timeline-card">
+        <div className="timeline space-y-8 stagger-in">
+          {journeyTimeline.map((item) => (
+            <div key={item.period} className="relative">
+              <div className="timeline-dot glow-pulse" />
+              <div className="rounded-lg p-4 transition-all duration-300 hover:bg-accent/5">
+                <span className="kicker mb-1.5 block">{item.period}</span>
+                <h3 className="heading-3 mb-2">{item.title}</h3>
+                <p className="muted-text mb-3">{item.body}</p>
+                <div className="flex flex-wrap gap-2">
+                  {item.details.map((detail) => (
+                    <span key={detail} className="tag">
+                      {detail}
                     </span>
-                    <h2 className="heading-2">{section.title}</h2>
-                  </div>
-                </div>
-                <p className="muted-text mb-4 leading-relaxed">{section.intro}</p>
-                <ul className="space-y-2.5 stagger-in">
-                  {section.points.map((point, index) => (
-                    <li key={index} className="flex items-start gap-2.5">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-br from-accent to-accent-secondary" />
-                      <span className="body-text text-sm">{point}</span>
-                    </li>
                   ))}
-                </ul>
-              </section>
-            ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </section>
+  );
+}
+
+function WorkTab() {
+  return (
+    <section className="tab-panel reveal visible space-y-6">
+      <div className="tab-panel-header card">
+        <span className="tab-panel-kicker">Work</span>
+        <h2 className="heading-2">A small set of public artifacts that make execution legible.</h2>
+      </div>
+
+      <div className="pillar-grid">
+        {selectedWork.map((item) => (
+          <Card
+            key={item.title}
+            badge={item.badge}
+            title={item.title}
+            description={item.description}
+            href={item.href.startsWith("http") ? item.href : undefined}
+            meta={item.meta}
+          />
+        ))}
+      </div>
+
+      <div className="card note-card">
+        <span className="tab-panel-kicker">Selection logic</span>
+        <p className="body-text mt-3">
+          The point is not to list everything. It is to show enough shipped proof to explain how Ravi
+          thinks, builds, and supports real work.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function ConnectTab() {
+  return (
+    <section className="tab-panel reveal visible space-y-6">
+      <div className="tab-panel-header card">
+        <span className="tab-panel-kicker">Connect</span>
+        <h2 className="heading-2">Clear entry points for review, follow-up, and collaboration.</h2>
+      </div>
+
+      <div className="space-y-3">
+        {connectItems.map((link) => (
+          <a
+            key={link.title}
+            href={link.href}
+            className="card-clickable group flex items-center justify-between p-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div>
+              <h3 className="font-medium transition-colors group-hover:text-accent">{link.title}</h3>
+              <p className="muted-text text-sm">{link.meta}</p>
+            </div>
+            <svg
+              className="h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+      </div>
+
+      <section id="connect-note" className="card note-card">
+        <span className="tab-panel-kicker">Working style</span>
+        <p className="body-text mt-3">
+          Best fit: remote guidance, structured async collaboration, and projects where positioning,
+          systems, and execution need to align quickly.
+        </p>
+      </section>
+    </section>
+  );
+}
+
+export default function HomePage() {
+  const [activeTab, setActiveTab] = useState(tabItems[0].href);
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (tabItems.some((item) => item.href === hash)) {
+        setActiveTab(hash);
+      }
+    };
+
+    onHashChange();
+    window.addEventListener("hashchange", onHashChange);
+
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  const changeTab = (nextTab: string) => {
+    setActiveTab(nextTab);
+    window.history.replaceState(null, "", `#${nextTab}`);
+  };
+
+  const currentTab = useMemo(() => {
+    switch (activeTab) {
+      case "journey":
+        return <JourneyTab />;
+      case "work":
+        return <WorkTab />;
+      case "connect":
+        return <ConnectTab />;
+      case "profile":
+      default:
+        return <ProfileTab />;
+    }
+  }, [activeTab]);
+
+  return (
+    <div className="page-layout single-page-shell">
+      <MobileNav
+        name={heroData.name}
+        navItems={tabItems}
+        activeTab={activeTab}
+        onTabChange={changeTab}
+      />
+      <SideNav
+        name={heroData.name}
+        role={heroData.title}
+        intro={heroData.intro}
+        navItems={tabItems}
+        activeTab={activeTab}
+        onTabChange={changeTab}
+      />
+
+      <div className="content-area">
+        <div className="content-container single-page-content animate-in">
+          <div className="float absolute right-12 top-20 hidden h-24 w-24 rounded-full bg-accent/10 blur-2xl lg:block" />
+          <div className="float-delayed absolute left-12 top-[32rem] hidden h-20 w-20 rounded-full bg-accent-secondary/10 blur-2xl lg:block" />
+
+          <Hero {...heroData} />
+
+          <div className="tab-strip" role="tablist" aria-label="Content tabs">
+            {tabItems.map((tab) => {
+              const isActive = activeTab === tab.href;
+              return (
+                <button
+                  key={tab.href}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`tab-chip ${isActive ? "active" : ""}`}
+                  onClick={() => changeTab(tab.href)}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Timeline - Enhanced Visual Style */}
-          <section className="card reveal visible">
-            <h2 className="heading-2 mb-6 flex items-center gap-2">
-              <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
-              Timeline
-            </h2>
-            <div className="timeline space-y-8 stagger-in">
-              {timeline.map((item, index) => (
-                <div key={index} className="relative group">
-                  <div className="timeline-dot glow-pulse" />
-                  <div className="rounded-lg p-4 transition-all duration-300 hover:bg-accent/5">
-                    <span className="kicker mb-1.5 block">{item.period}</span>
-                    <h3 className="heading-3 mb-2">{item.title}</h3>
-                    <p className="muted-text mb-3 leading-relaxed">{item.body}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {item.details.map((detail, i) => (
-                        <span
-                          key={i}
-                          className="tag transition-all duration-300 hover:bg-accent/20"
-                        >
-                          {detail}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Selected Work - Card Grid */}
-          {cardSections.map((section) => (
-            <section key={section.id} className="space-y-4 reveal visible">
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
-                <h2 className="heading-2">{section.title}</h2>
-              </div>
-              <div className="pillar-grid">
-                {section.items.map((item, cardIdx) => (
-                  <Card
-                    key={item.title}
-                    badge={item.badge}
-                    title={item.title}
-                    description={item.description}
-                    href={item.href}
-                    meta={item.meta}
-                  />
-                ))}
-              </div>
-            </section>
-          ))}
-
-          {/* Links - Enhanced List Style */}
-          <section className="card reveal visible">
-            <h2 className="heading-2 mb-5 flex items-center gap-2">
-              <span className="h-1.5 w-6 rounded-full bg-gradient-to-r from-accent to-accent-secondary" />
-              Links
-            </h2>
-            <div className="space-y-3 stagger-in">
-              {links.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  className="card-clickable group flex items-center justify-between p-4"
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-accent/15 to-accent-secondary/15 transition-transform duration-300 group-hover:scale-110">
-                      {index === 0 && (
-                        <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                        </svg>
-                      )}
-                      {index === 1 && (
-                        <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                      )}
-                      {index === 2 && (
-                        <svg className="h-4 w-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      )}
-                    </span>
-                    <div>
-                      <h3 className="font-medium transition-colors group-hover:text-accent">
-                        {link.title}
-                      </h3>
-                      <p className="muted-text text-sm">{link.meta}</p>
-                    </div>
-                  </div>
-                  <svg
-                    className="h-5 w-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </a>
-              ))}
-            </div>
-          </section>
+          {currentTab}
         </div>
       </div>
     </div>
